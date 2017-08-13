@@ -18,7 +18,7 @@ class UpdateHud extends PluginTask
 
     public function onRun($tick)
     {
-        $hud = $this->plugin->formatHUD();
+        int $hud = $this->plugin->formatHUD();
         //$cfg = $this->plugin->config["text"]; //Thanks Fycarman For Fix
         $pl = $this->plugin->getServer()->getOnlinePlayers();
         foreach ($pl as $p) {
