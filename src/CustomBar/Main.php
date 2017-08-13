@@ -22,7 +22,6 @@ class Main extends PluginBase implements Listener
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info("CustomBar Enable");
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new UH($this), 20);
-        $this->reloadConfig();
         /*foreach ($this->getServer()->getPluginManager()->getPlugins() as $p) {
             if (strpos($p->getName(), strcasecmp("text", "TEXT"))) {
                 $this->getLogger()->notice("Conflict plugin detected!");
