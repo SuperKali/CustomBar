@@ -20,7 +20,7 @@ class Main extends PluginBase implements Listener
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info("CustomBar Enable");
         $this->config = (new Config($this->getDataFolder() . "config.yml", Config::YAML));//Thanks Fycarman For Fix
-        //$this->config = $this->config->getAll();//Thanks Fycarman For Fix
+        $this->config = $this->config->getAll();//Thanks Fycarman For Fix
         $this->saveResource("config.yml");
         $this->saveDefaultConfig();
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new UpdateTask($this), 20);
@@ -40,17 +40,7 @@ class Main extends PluginBase implements Listener
         $this->getLogger()->info("CustomBar Disable");
         $this->saveDefaultConfig();
     }
-    /*public function parseTags($motd) {
-        $motd = str_replace("&", $this->colourstring, $motd);
-        $motd = str_replace("{SERVER_NAME}", $this->plugin->getServer()->getName(), $motd);
-        $motd = str_replace("{SERVER_MOTD}", $this->plugin->getServer()->getMotd(), $motd);
-        $motd = str_replace("{ONLINE_PLAYERS}", count($this->plugin->getServer()->getOnlinePlayers()), $motd);
-        $motd = str_replace("{MAX_PLAYERS}", $this->plugin->getServer()->getMaxPlayers(), $motd);
-        $motd = str_replace("{TPS}", $this->plugin->getServer()->getTicksPerSecond(), $motd);
-
-        return $motd;
-    }*/
-    public function formatHUD(): string{
+    /*public function formatHUD(): string{
         return str_replace(array(
             "&",
             "{tps}",
@@ -68,7 +58,7 @@ class Main extends PluginBase implements Listener
             "\n",
         ), $this->plugin->config["text"];
     }
-}
+}*/
 
 class UpdateTask extends PluginTask
 {
@@ -80,11 +70,11 @@ class UpdateTask extends PluginTask
 
     public function onRun($tick)
     {
-        $hud = $this->plugin->formatHUD();
-        //$cfg = $this->plugin->config["text"]; //Thanks Fycarman For Fix
+        //$hud = $this->plugin->formatHUD();
+        $cfg = $this->plugin->config["text"]; //Thanks Fycarman For Fix
         $pl = $this->plugin->getServer()->getOnlinePlayers();
         foreach ($pl as $p) {
-            $p->sendPopup($hud);
+            $p->sendPopup($cfg);
         }
     }
 }
