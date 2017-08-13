@@ -1,0 +1,8 @@
+name: CustomBar
+author: SuperKali
+version: 0.1
+api:
+- '*'
+main: CustomBar\Main
+description: Custom bar for your server!
+site: https://github.com/SuperKali
