@@ -23,7 +23,7 @@ class Main extends PluginBase implements Listener
         $this->config = $this->config->getAll();//Thanks Fycarman For Fix
         $this->saveResource("config.yml");
         $this->saveDefaultConfig();
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new UpdateTask($this), 20);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new Task\UpdateHud($this), 20);
         $this->reloadConfig();
         foreach ($this->getServer()->getPluginManager()->getPlugins() as $p) {
             if (strpos($p->getName(), strcasecmp("text", "TEXT"))) {
@@ -40,6 +40,7 @@ class Main extends PluginBase implements Listener
         $this->getLogger()->info("CustomBar Disable");
         $this->saveDefaultConfig();
     }
+}
     /*public function formatHUD(): string{
         return str_replace(array(
             "&",
@@ -59,22 +60,3 @@ class Main extends PluginBase implements Listener
         ), $this->plugin->config["text"];
     }
 }*/
-
-class UpdateTask extends PluginTask
-{
-    public function __construct($plugin)
-    {
-        $this->plugin = $plugin;
-        parent::__construct($plugin);
-    }
-
-    public function onRun($tick)
-    {
-        //$hud = $this->plugin->formatHUD();
-        $cfg = $this->plugin->config["text"]; //Thanks Fycarman For Fix
-        $pl = $this->plugin->getServer()->getOnlinePlayers();
-        foreach ($pl as $p) {
-            $p->sendPopup($cfg);
-        }
-    }
-}
