@@ -11,6 +11,8 @@ use pocketmine\scheduler\PluginTask;
 use pocketmine\scheduler\Task;
 use pocketmine\utils\Config;
 
+use CostumBar\Task\UpdateHud as UH;
+
 class Main extends PluginBase implements Listener
 {
     public $config;
@@ -19,7 +21,7 @@ class Main extends PluginBase implements Listener
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info("CustomBar Enable");
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new Task\UpdateHud($this), 20);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new UH($this), 20);
         $this->reloadConfig();
         /*foreach ($this->getServer()->getPluginManager()->getPlugins() as $p) {
             if (strpos($p->getName(), strcasecmp("text", "TEXT"))) {
