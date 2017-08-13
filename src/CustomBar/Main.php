@@ -11,7 +11,7 @@ use pocketmine\scheduler\PluginTask;
 use pocketmine\scheduler\Task;
 use pocketmine\utils\Config;
 
-use CostumBar\Task\UpdateHud as UH;
+use CustomBar\Task\UpdateHud as UH;
 
 class Main extends PluginBase implements Listener
 {
