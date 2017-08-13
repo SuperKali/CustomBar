@@ -41,22 +41,23 @@ class Main extends PluginBase implements Listener
         $this->saveDefaultConfig();
     }
 }
-    /*public function formatHUD(): string{
+    public function formatHUD(): string{
         return str_replace(array(
-            "&",
-            "{tps}",
-            "{motd}",
-            "{players}",
-            "{max_players}",
-            "{server_name}",
-            "{line}",
+            "&", // 1
+            "{tps}", // 2
+            "{motd}", // 3
+            "{players}", // 4
+            "{max_players}", // 5
+            "{server_name}", // 6
+            "{line}" // 7
         ), array(
-            "§",
-            $this->getServer()->getTicksPerSecond(),
-            $this->getServer()->getMotd(),
-            count($this->getServer()->getOnlinePlayers()),
-            $this->getServer()->getMaxPlayers(),
-            "\n",
+            "§", // 1
+            $this->getServer()->getTicksPerSecond(), // 2
+            $this->getServer()->getMotd(), // 3
+            count($this->getServer()->getOnlinePlayers()), // 4
+            $this->getServer()->getMaxPlayers(), // 5
+            $this->getServer()->getName(), // 6
+            "\n" // 7
         ), $this->plugin->config["text"];
     }
-}*/
+}
