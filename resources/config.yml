@@ -1,0 +1,11 @@
+#
+#   ___        _               _  _         _
+#  / __|  _ __| |_ ___ _ __   | || |_  _ __| |
+# | (_| || (_-<  _/ _ \ '  \  | __ | || / _` |
+#  \___\_,_/__/\__\___/_|_|_| |_||_|\_,_\__,_|
+#
+
+# Text you will see on the server, {tps} {load} {players} {max_players} {line} and & for color
+text: "CustomBar Make By SuperKali"
+# Time that the message is updated, P.S Leave the default 20!
+time: 20
