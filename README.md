@@ -7,13 +7,22 @@
 * You can add options to show players in the game!
 * In the future new updates!
 
+## Format HUD List
+
+* {tps} 
+* {load}
+* {player}
+* {max_players}
+* {line}
+* & and §
+
 ## TO-DO List ITA
 
 - [x] La possibilità di customizzare la hud dal config!
-- [ ] La possibilità di aggiungere delle personalizzazioni!
+- [x] La possibilità di aggiungere delle personalizzazioni!
 - [ ] La possibilità di mettere il motd del server per farlo spuntare in game!
-- [ ] La possibilità di visualizzare i massimo dei slot e la quatità di giocatori online!
-- [ ] La possibilità di visualizzare i tps del server in game!
+- [x] La possibilità di visualizzare i massimo dei slot e la quatità di giocatori online!
+- [x] La possibilità di visualizzare i tps del server in game!
 
 ## Is the plugin working?
 
