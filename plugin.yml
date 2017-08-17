@@ -1,6 +1,6 @@
 name: CustomBar
 author: SuperKali
-version: 0.2
+version: 0.3
 api:
 - '*'
 main: CustomBar\Main

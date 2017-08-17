@@ -6,6 +6,6 @@
 #
 
 # Text you will see on the server, {tps} {load} {players} {max_players} {line} and & for color
-text: "CustomBar Make By SuperKali"
-# Time that the message is updated, P.S Leave the default 20!
-time: 20
+text: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {load}"
+# Time that the message is updated, P.S Leave the default 5!
+time: 5
