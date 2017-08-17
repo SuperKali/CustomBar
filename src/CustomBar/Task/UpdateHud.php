@@ -20,7 +20,7 @@ class UpdateHud extends PluginTask
         //$cfg = $this->plugin->config["text"]; //Thanks Fycarman For Fix
         $pl = $this->plugin->getServer()->getOnlinePlayers();
         foreach ($pl as $p) {
-            $p->sendPopup($text);
+            $p->sendTip($text);
         }
     }
 }
