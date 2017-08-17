@@ -14,6 +14,7 @@
 * {player}
 * {max_players}
 * {line}
+* {coins} EconomyAPI necessary!
 * & and §
 
 ## TO-DO List ITA
