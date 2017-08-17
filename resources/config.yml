@@ -5,7 +5,8 @@
 #  \___\_,_/__/\__\___/_|_|_| |_||_|\_,_\__,_|
 #
 
-# Text you will see on the server, {tps} {load} {players} {max_players} {line} and & for color
-text: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {load}"
+# Text you will see on the server, {tps} {load} {players} {max_players} {line} {coins} and & for color
+# {coins} You need to use EconomyAPI to show money
+text: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {load}&r{line}&eCoins&8:&5 {coins}"
 # Time that the message is updated, P.S Leave the default 5!
 time: 5
