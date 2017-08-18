@@ -38,21 +38,27 @@ class Main extends PluginBase implements Listener
     public function formatHUD(Player $player): string
     {
         return str_replace(array(
-            "&",
-            "{tps}",
-            "{coins}",
-            "{load}",
-            "{players}",
-            "{max_players}",
-            "{line}",
+            "&", //1
+            "{tps}", //2
+            "{x}", //3
+            "{y}", //4
+            "{z}", //5
+            "{coins}", //6
+            "{load}", //7
+            "{players}", //8
+            "{max_players}", //9
+            "{line}", //10
         ), array(
-            "§",
-            $this->getServer()->getTicksPerSecond(),
-            $this->eco->myMoney($player->getName()),
-            $this->getServer()->getTickUsage(),
-            count($this->getServer()->getOnlinePlayers()),
-            $this->getServer()->getMaxPlayers(),
-            "\n"
+            "§", //1
+            $this->getServer()->getTicksPerSecond(), //2
+            (int)$player->getX(), //3
+            (int)$player->getY(), //4
+            (int)$player->getZ(), //5
+            $this->eco->myMoney($player->getName()), //6
+            $this->getServer()->getTickUsage(), //7
+            count($this->getServer()->getOnlinePlayers()), //8
+            $this->getServer()->getMaxPlayers(), //9
+            "\n" //10
         ), $this->getConfig()->getNested("text"));
     }
 }
