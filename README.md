@@ -14,6 +14,7 @@
 * {load}
 * {player}
 * {max_players}
+* {x} {y} {z}
 * {line}
 * {coins} EconomyAPI necessary!
 * & and §
