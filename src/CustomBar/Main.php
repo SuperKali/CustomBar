@@ -48,6 +48,7 @@ class Main extends PluginBase implements Listener
             "{players}", //8
             "{max_players}", //9
             "{line}", //10
+            "{MOTD}", //11
         ), array(
             "§", //1
             $this->getServer()->getTicksPerSecond(), //2
@@ -58,7 +59,8 @@ class Main extends PluginBase implements Listener
             $this->getServer()->getTickUsage(), //7
             count($this->getServer()->getOnlinePlayers()), //8
             $this->getServer()->getMaxPlayers(), //9
-            "\n" //10
+            "\n", //10
+            $this->getServer()->getMotd() //11
         ), $this->getConfig()->getNested("text"));
     }
 }
