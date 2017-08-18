@@ -13,7 +13,7 @@
 * {tps} 
 * {load}
 * {MOTD}
-* {player}
+* {players}
 * {max_players}
 * {x} {y} {z}
 * {line}
