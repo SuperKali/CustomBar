@@ -12,6 +12,7 @@
 
 * {tps} 
 * {load}
+* {MOTD}
 * {player}
 * {max_players}
 * {x} {y} {z}
@@ -19,11 +20,11 @@
 * {coins} EconomyAPI necessary!
 * & and §
 
-## TO-DO List ITA
+## TO-DO Complete ITA
 
 - [x] La possibilità di customizzare la hud dal config!
 - [x] La possibilità di aggiungere delle personalizzazioni!
-- [ ] La possibilità di mettere il motd del server per farlo spuntare in game!
+- [X] La possibilità di mettere il motd del server per farlo spuntare in game!
 - [x] La possibilità di visualizzare i massimo dei slot e la quatità di giocatori online!
 - [x] La possibilità di visualizzare i tps del server in game!
 
