@@ -1,5 +1,6 @@
 # Custom Bar Plugin for GenisysPro
 
+[![Poggit-CI](https://poggit.pmmp.io/ci.badge/SuperKali/CustomBar/CustomBar)](https://poggit.pmmp.io/ci/SuperKali/CustomBar/CustomBar)
 
 ## how does it work?
 
