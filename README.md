@@ -10,6 +10,7 @@
 
 ## Format HUD List
 
+* {name}
 * {tps} 
 * {load}
 * {MOTD}
@@ -17,6 +18,7 @@
 * {max_players}
 * {x} {y} {z}
 * {line}
+* {faction} FactionsPro necessary!
 * {coins} EconomyAPI necessary!
 * & and §
 
