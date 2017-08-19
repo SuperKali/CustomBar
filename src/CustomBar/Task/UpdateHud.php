@@ -19,7 +19,7 @@ class UpdateHud extends PluginTask
         $pl = $this->plugin->getServer()->getOnlinePlayers();
         foreach ($pl as $player) {
             $text = $this->plugin->formatHUD($player);
-            $player->sendTip($text);
+            $player->sendPopup($text);
         }
     }
 }
