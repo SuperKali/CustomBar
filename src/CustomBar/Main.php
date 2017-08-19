@@ -38,7 +38,11 @@ class Main extends PluginBase implements Listener
         $this->saveDefaultConfig();
         $this->getLogger()->info($this->prefix . CL::RED . " by SuperKali Disable");
     }
-
+    public function getTime()
+    {
+        date_default_timezone_set($this->getConfig()->getNested("timezone"));
+        return date("H:i");
+    }
     public function formatHUD(Player $player): string
     {
         return str_replace(array(
@@ -55,6 +59,7 @@ class Main extends PluginBase implements Listener
             "{MOTD}", //11
             "{faction}", //12
             "{name}", //13
+            "{time}",
         ), array(
             "§", //1
             $this->getServer()->getTicksPerSecond(), //2
@@ -68,7 +73,8 @@ class Main extends PluginBase implements Listener
             "\n", //10
             $this->getServer()->getMotd(), //11
             $this->pro ? $this->pro->getPlayerFaction($player->getName()) : "", //12
-            $player->getName() //13
+            $player->getName(), //13
+            $this->getTime($player) //14
         ), $this->getConfig()->getNested("text"));
     }
 }
