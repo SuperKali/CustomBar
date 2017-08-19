@@ -59,7 +59,7 @@ class Main extends PluginBase implements Listener
             "{MOTD}", //11
             "{faction}", //12
             "{name}", //13
-            "{time}",
+            "{time}", //14
         ), array(
             "§", //1
             $this->getServer()->getTicksPerSecond(), //2
