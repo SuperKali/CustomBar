@@ -24,6 +24,10 @@ class Main extends PluginBase implements Listener
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " EconomyAPI not found");
             //$this->getServer()->getPluginManager()->disablePlugin($this); //TO-DO v1.0
         }
+        if(!$this->pro = $this->getServer()->getPluginManager()->getPlugin('FactionsPro')) {
+            $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " FactionPro not found");
+            //$this->getServer()->getPluginManager()->disablePlugin($this); //TO-DO v1.0
+        }
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new UH($this), $this->getConfig()->get("time") * 4);
@@ -49,18 +53,22 @@ class Main extends PluginBase implements Listener
             "{max_players}", //9
             "{line}", //10
             "{MOTD}", //11
+            "{faction}", //12
+            "{name}", //13
         ), array(
             "§", //1
             $this->getServer()->getTicksPerSecond(), //2
             (int)$player->getX(), //3
             (int)$player->getY(), //4
             (int)$player->getZ(), //5
-            $this->eco->myMoney($player->getName()), //6
+            $this->eco ?  $this->eco->myMoney($player->getName()) : "", //6
             $this->getServer()->getTickUsage(), //7
             count($this->getServer()->getOnlinePlayers()), //8
             $this->getServer()->getMaxPlayers(), //9
             "\n", //10
-            $this->getServer()->getMotd() //11
+            $this->getServer()->getMotd(), //11
+            $this->pro ? $this->pro->getPlayerFaction($player->getName()) : "", //12
+            $player->getName() //13
         ), $this->getConfig()->getNested("text"));
     }
 }
