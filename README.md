@@ -13,6 +13,7 @@
 * {name}
 * {tps} 
 * {load}
+* {time}
 * {MOTD}
 * {players}
 * {max_players}
