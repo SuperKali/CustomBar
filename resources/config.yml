@@ -12,3 +12,5 @@ text: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {lo
 time: 5
 #TimeZones configuration.
 timezone: CET
+#TimeZones Format Configuration Example (H:i) Format 24 hours (g:i A) Format 12 hours.
+formatime: H:i
