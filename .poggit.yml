@@ -1,6 +1,7 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/SuperKali/CustomBar
 branches:
 - master
+- PMMP-ALPHA7
 projects:
   CustomBar:
     path: ""
