@@ -41,7 +41,7 @@ class Main extends PluginBase implements Listener
     public function getTime()
     {
         date_default_timezone_set($this->getConfig()->getNested("timezone"));
-        return date("H:i");
+        return date($this->getConfig()->get("formatime"));
     }
     public function formatHUD(Player $player): string
     {
