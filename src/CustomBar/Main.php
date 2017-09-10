@@ -31,7 +31,7 @@ class Main extends PluginBase implements Listener
         }
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new UH($this), $this->getConfig()->get("time") * 5);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new UH($this), $this->getConfig()->get("time") * 4);
     }
 
     public function onDisable()

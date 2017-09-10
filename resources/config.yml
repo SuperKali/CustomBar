@@ -12,8 +12,8 @@
 #Text to show on the server in the custom bar!
 text: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {load}&r{line}&eXYZ&8:&2 {x} {y} {z}&r"
 
-#Time that the message is updated, P.S Leave the default 6!
-time: 6
+#Time that the message is updated, P.S Leave the default 5!
+time: 5
 
 #imeZones configuration, link: https://www.timeanddate.com/time/zones , Default timezone Central European!
 timezone: CET
