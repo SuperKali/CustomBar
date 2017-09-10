@@ -78,8 +78,8 @@ class Main extends PluginBase implements Listener
             $this->pro ? $this->pro->getPlayerFaction($player->getName()) : "", //12
             $player->getName(), //13
             $this->getTime($player), //14
-            $this->chat ? $this->chat->getKills($player->getName()) : "",
-            $this->chat ? $this->chat->getDeaths($player->getName()) : ""
+            $this->chat ? $this->chat->getKills($player->getName()) : "", //15
+            $this->chat ? $this->chat->getDeaths($player->getName()) : "" //16
         ), $this->getConfig()->getNested("text"));
     }
 }

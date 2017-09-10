@@ -21,15 +21,9 @@
 * {line}
 * {faction} FactionsPro necessary!
 * {coins} EconomyAPI necessary!
+* {kills} KillChat necessary!
+* {deaths} KillChat necessary!
 * & and §
-
-## TO-DO Complete ITA
-
-- [x] La possibilità di customizzare la hud dal config!
-- [x] La possibilità di aggiungere delle personalizzazioni!
-- [X] La possibilità di mettere il motd del server per farlo spuntare in game!
-- [x] La possibilità di visualizzare i massimo dei slot e la quatità di giocatori online!
-- [x] La possibilità di visualizzare i tps del server in game!
 
 ## Is the plugin working?
 

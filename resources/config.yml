@@ -10,7 +10,7 @@
 #{kills} and {deaths} You need to use KillChat to show Kill and Deaths!
 
 #Text to show on the server in the custom bar!
-t ext: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {load}&r{line}&eXYZ&8:&2 {x} {y} {z}&r"
+text: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {load}&r{line}&eXYZ&8:&2 {x} {y} {z}&r"
 
 #Time that the message is updated, P.S Leave the default 6!
 time: 6
