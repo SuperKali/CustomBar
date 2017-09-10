@@ -14,7 +14,7 @@ class UpdateHud extends PluginTask
         parent::__construct($plugin);
     }
 
-    public function onRun(int $tick)
+    public function onRun($tick)
     {
         $pl = $this->plugin->getServer()->getOnlinePlayers();
         foreach ($pl as $player) {
