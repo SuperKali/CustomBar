@@ -5,12 +5,18 @@
 #  \___\_,_/__/\__\___/_|_|_| |_||_|\_,_\__,_|
 #
 
-# Text you will see on the server, {tps}, {load}, {players}, {max_players}, {line}, {x} {y} {z}, {coins}, {MOTD}, {faction}, {name}, {time} and & for color
-# {coins} You need to use EconomyAPI to show money
+#Text you will see on the server, {tps}, {load}, {players}, {max_players}, {line}, {x} {y} {z}, {coins}, {MOTD}, {faction}, {name}, {time}, {kills}, {deaths} and & for color
+#{coins} You need to use EconomyAPI to show money!
+#{kills} and {deaths} You need to use KillChat to show Kill and Deaths!
+
+#Text to show on the server in the custom bar!
 text: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {load}&r{line}&eXYZ&8:&2 {x} {y} {z}&r"
-# Time that the message is updated, P.S Leave the default 5!
-time: 5
-#TimeZones configuration, link: https://www.timeanddate.com/time/zones , Default timezone Central European!
+
+#Time that the message is updated, P.S Leave the default 6!
+time: 6
+
+#imeZones configuration, link: https://www.timeanddate.com/time/zones , Default timezone Central European!
 timezone: CET
+
 #TimeZones Format Configuration Example (H:i) Format 24 hours (h:i A) Format 12 hours, Default formatime 24 hours!
 formatime: H:i

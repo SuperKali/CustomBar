@@ -22,15 +22,16 @@ class Main extends PluginBase implements Listener
         $this->saveDefaultConfig();
         if(!$this->eco = $this->getServer()->getPluginManager()->getPlugin('EconomyAPI')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " EconomyAPI not found");
-            //$this->getServer()->getPluginManager()->disablePlugin($this); //TO-DO v1.0
         }
         if(!$this->pro = $this->getServer()->getPluginManager()->getPlugin('FactionsPro')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " FactionPro not found");
-            //$this->getServer()->getPluginManager()->disablePlugin($this); //TO-DO v1.0
+        }
+        if(!$this->chat = $this->getServer()->getPluginManager()->getPlugin('KillChat')) {
+            $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " KillChat not found");
         }
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new UH($this), $this->getConfig()->get("time") * 4);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new UH($this), $this->getConfig()->get("time") * 5);
     }
 
     public function onDisable()
@@ -60,6 +61,8 @@ class Main extends PluginBase implements Listener
             "{faction}", //12
             "{name}", //13
             "{time}", //14
+            "{kills}", //15
+            "{deaths}", //16
         ), array(
             "§", //1
             $this->getServer()->getTicksPerSecond(), //2
@@ -74,7 +77,9 @@ class Main extends PluginBase implements Listener
             $this->getServer()->getMotd(), //11
             $this->pro ? $this->pro->getPlayerFaction($player->getName()) : "", //12
             $player->getName(), //13
-            $this->getTime($player) //14
+            $this->getTime($player), //14
+            $this->chat ? $this->chat->getKills($player->getName()) : "", //15
+            $this->chat ? $this->chat->getDeaths($player->getName()) : "" //16
         ), $this->getConfig()->getNested("text"));
     }
 }
