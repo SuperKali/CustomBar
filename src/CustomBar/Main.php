@@ -7,7 +7,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat as CL;
 use pocketmine\Player;
 
-use CustomBar\Task\UpdateHud as UH;
+use CustomBar\Task\TaskHud as TH;
 
 
 class Main extends PluginBase implements Listener
@@ -30,7 +30,7 @@ class Main extends PluginBase implements Listener
         }
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new UH($this), $this->getConfig()->get("time") * 4);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
     }
 
     public function onDisable()
