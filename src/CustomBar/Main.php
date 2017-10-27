@@ -7,7 +7,6 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat as CL;
 use pocketmine\Player;
 
-
 use CustomBar\Task\UpdateHud as UH;
 
 
@@ -47,39 +46,39 @@ class Main extends PluginBase implements Listener
     public function formatHUD(Player $player): string
     {
         return str_replace(array(
-            "&", //1
-            "{tps}", //2
-            "{x}", //3
-            "{y}", //4
-            "{z}", //5
-            "{coins}", //6
-            "{load}", //7
-            "{players}", //8
-            "{max_players}", //9
-            "{line}", //10
-            "{MOTD}", //11
-            "{faction}", //12
-            "{name}", //13
-            "{time}", //14
-            "{kills}", //15
-            "{deaths}", //16
+            "&", #1
+            "{tps}", #2
+            "{x}", #3
+            "{y}", #4
+            "{z}", #5
+            "{coins}", #6
+            "{load}", #7
+            "{players}", #8
+            "{max_players}", #9
+            "{line}", #10
+            "{MOTD}", #11
+            "{faction}", #12
+            "{name}", #13
+            "{time}", #14
+            "{kills}", #15
+            "{deaths}", #16
         ), array(
-            "§", //1
-            $this->getServer()->getTicksPerSecond(), //2
-            (int)$player->getX(), //3
-            (int)$player->getY(), //4
-            (int)$player->getZ(), //5
-            $this->eco ?  $this->eco->myMoney($player->getName()) : "", //6
-            $this->getServer()->getTickUsage(), //7
-            count($this->getServer()->getOnlinePlayers()), //8
-            $this->getServer()->getMaxPlayers(), //9
-            "\n", //10
-            $this->getServer()->getMotd(), //11
-            $this->pro ? $this->pro->getPlayerFaction($player->getName()) : "", //12
-            $player->getName(), //13
-            $this->getTime($player), //14
-            $this->chat ? $this->chat->getKills($player->getName()) : "", //15
-            $this->chat ? $this->chat->getDeaths($player->getName()) : "" //16
+            "§", #1
+            $this->getServer()->getTicksPerSecond(), #2
+            (int)$player->getX(), #3
+            (int)$player->getY(), #4
+            (int)$player->getZ(), #5
+            $this->eco ?  $this->eco->myMoney($player->getName()) : "", #6
+            $this->getServer()->getTickUsage(), #7
+            count($this->getServer()->getOnlinePlayers()), #8
+            $this->getServer()->getMaxPlayers(), #9
+            "\n", #10
+            $this->getServer()->getMotd(), #11
+            $this->pro ? $this->pro->getPlayerFaction($player->getName()) : "", #12
+            $player->getName(), #13
+            $this->getTime($player), #14
+            $this->chat ? $this->chat->getKills($player->getName()) : "", #15
+            $this->chat ? $this->chat->getDeaths($player->getName()) : "" #16
         ), $this->getConfig()->getNested("text"));
     }
 }
