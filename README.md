@@ -1,4 +1,4 @@
-# Custom Bar Plugin for GenisysPro
+# Custom Bar Plugin for PMMP
 
 [![](https://poggit.pmmp.io/shield.dl.total/CustomBar)](https://poggit.pmmp.io/p/CustomBar)
 [![](https://poggit.pmmp.io/shield.api/CustomBar)](https://poggit.pmmp.io/p/CustomBar)
