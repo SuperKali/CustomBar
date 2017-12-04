@@ -19,6 +19,7 @@
 * {max_players}
 * {x} {y} {z}
 * {line}
+* {ping}
 * {faction} FactionsPro necessary!
 * {coins} EconomyAPI necessary!
 * {kills} KillChat necessary!
