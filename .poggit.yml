@@ -4,4 +4,5 @@ branches:
 projects:
   CustomBar:
     path: ""
+    icon: icon.png
 ...
