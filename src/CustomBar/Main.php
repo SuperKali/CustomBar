@@ -45,6 +45,7 @@ class Main extends PluginBase implements Listener
     }
     public function formatHUD(Player $player): string
     {
+        $name = $player->getName();
         return str_replace(array(
             "&", #1
             "{tps}", #2
@@ -62,23 +63,25 @@ class Main extends PluginBase implements Listener
             "{time}", #14
             "{kills}", #15
             "{deaths}", #16
+            "{ping}", #17
         ), array(
             "§", #1
             $this->getServer()->getTicksPerSecond(), #2
             (int)$player->getX(), #3
             (int)$player->getY(), #4
             (int)$player->getZ(), #5
-            $this->eco ?  $this->eco->myMoney($player->getName()) : "", #6
+            $this->eco ?  $this->eco->myMoney($name) : "", #6
             $this->getServer()->getTickUsage(), #7
             count($this->getServer()->getOnlinePlayers()), #8
             $this->getServer()->getMaxPlayers(), #9
             "\n", #10
             $this->getServer()->getMotd(), #11
-            $this->pro ? $this->pro->getPlayerFaction($player->getName()) : "", #12
+            $this->pro ? $this->pro->getPlayerFaction($name) : "", #12
             $player->getName(), #13
             $this->getTime($player), #14
-            $this->chat ? $this->chat->getKills($player->getName()) : "", #15
-            $this->chat ? $this->chat->getDeaths($player->getName()) : "" #16
+            $this->chat ? $this->chat->getKills($name) : "", #15
+            $this->chat ? $this->chat->getDeaths($name) : "", #16
+            $player->getPing($name) #17
         ), $this->getConfig()->getNested("text"));
     }
 }
