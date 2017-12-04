@@ -33,6 +33,5 @@
 ## Which version is compatible?
 
 This plugin is compatible with:
-- [x] **[PMMP](https://github.com/SuperKali/CustomBar/tree/PMMP-ALPHA7)**
-- [X] **[GenisysPro](https://github.com/SuperKali/CustomBar)**
-- [x] **[ClearSky-PMMP](https://github.com/SuperKali/CustomBar/tree/PMMP-ALPHA7)**
+- [x] **[PMMP]**
+- [x] **[ClearSky-PMMP]**
