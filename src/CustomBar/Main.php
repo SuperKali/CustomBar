@@ -28,6 +28,9 @@ class Main extends PluginBase implements Listener
         if(!$this->chat = $this->getServer()->getPluginManager()->getPlugin('KillChat')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " KillChat not found");
         }
+        if(!$this->pure = $this->getServer()->getPluginManager()->getPlugin('PurePerms')) {
+            $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " PurePerms not found");
+        }
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
@@ -64,6 +67,7 @@ class Main extends PluginBase implements Listener
             "{kills}", #15
             "{deaths}", #16
             "{ping}", #17
+            "{group}", #18
         ), array(
             "§", #1
             $this->getServer()->getTicksPerSecond(), #2
@@ -81,7 +85,8 @@ class Main extends PluginBase implements Listener
             $this->getTime($player), #14
             $this->chat ? $this->chat->getKills($name) : "", #15
             $this->chat ? $this->chat->getDeaths($name) : "", #16
-            $player->getPing($name) #17
+            $player->getPing($name), #17
+            $this->pure ? $this->pure->getUserDataMgr()->getGroup($player)->getName()
         ), $this->getConfig()->getNested("text"));
     }
 }
