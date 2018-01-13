@@ -4,7 +4,6 @@ version: 1.1
 api:
 - '3.0.0-ALPHA9'
 - '3.0.0-ALPHA10'
-- '3.0.0-ALPHA11'
 main: CustomBar\Main
 description: Custom bar for your server!
 github: https://github.com/SuperKali/CustomBar
