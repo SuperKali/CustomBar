@@ -27,6 +27,7 @@
 * {coins} EconomyAPI necessary!
 * {kills} KillChat necessary!
 * {deaths} KillChat necessary!
+* {group} PurePerms necessary!
 * & and §
 
 ## Is the plugin working?
