@@ -91,7 +91,7 @@ class Main extends PluginBase implements Listener
             $this->chat ? $this->chat->getKills($name) : "", #15
             $this->chat ? $this->chat->getDeaths($name) : "", #16
             $player->getPing($name), #17
-            $this->pure ? $this->pure->getUserDataMgr()->getGroup($player)->getName() : ""
+            $this->pure ? $this->pure->getUserDataMgr()->getGroup($player)->getName() : "" #18
         ), $this->getConfig()->getNested("text"));
     }
 }
