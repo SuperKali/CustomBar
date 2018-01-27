@@ -4,6 +4,7 @@
 [![](https://poggit.pmmp.io/shield.api/CustomBar)](https://poggit.pmmp.io/p/CustomBar)
 [![](https://poggit.pmmp.io/shield.state/CustomBar)](https://poggit.pmmp.io/p/CustomBar)
 [![Download](https://img.shields.io/badge/download-latest-blue.svg)](https://poggit.pmmp.io/r/17283/CustomBar.phar)
+[![HitCount](http://hits.dwyl.io/{username}/{project}.svg)](http://hits.dwyl.io/SuperKali/CustomBar)
 
 ## how does it work?
 
