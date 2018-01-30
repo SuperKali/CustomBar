@@ -2,7 +2,8 @@
 
 namespace CustomBar;
 
-use CustomBar\Utils\KillChat;
+use CustomBar\Utils\KillChats\KillChat;
+use CustomBar\Utils\KillChats\KillEvents;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat as CL;
@@ -24,6 +25,7 @@ class Main extends PluginBase implements Listener
 
     public function onEnable()
     {
+        @mkdir($this->getDataFolder() . "data/");
         $this->saveDefaultConfig();
         if(!$this->eco = $this->getServer()->getPluginManager()->getPlugin('EconomyAPI')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " EconomyAPI not found");
@@ -39,6 +41,7 @@ class Main extends PluginBase implements Listener
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
         if ($this->getConfig()->get("Allow.KillChat" == true)){
             $this->getServer()->getPluginManager()->registerEvents(new KillChat($this), $this);
+            $this->getServer()->getPluginManager()->registerEvents(new KillEvents($this), $this);
         }
     }
 
