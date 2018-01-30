@@ -13,6 +13,7 @@ class KillChat implements Listener {
 
     public function __construct(Plugin $plugin){
         $this->owner = $plugin;
+        @mkdir($this->owner->getDataFolder() . "data/");
     }
     public function onPlayerDeath(PlayerDeathEvent $event){
         //Getting Victim
