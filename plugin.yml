@@ -7,3 +7,6 @@ api:
 main: CustomBar\Main
 description: Custom bar for your server!
 github: https://github.com/SuperKali/CustomBar
+commands:
+ customhud:
+  description: "Allow many command for op players"

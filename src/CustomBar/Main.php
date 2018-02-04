@@ -2,8 +2,11 @@
 
 namespace CustomBar;
 
+use CustomBar\Task\TaskHud;
 use CustomBar\Utils\KillChats\KillChat;
 use CustomBar\Utils\KillChats\KillEvents;
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat as CL;
@@ -55,6 +58,20 @@ class Main extends PluginBase implements Listener
         date_default_timezone_set($this->getConfig()->getNested("timezone"));
         return date($this->getConfig()->get("formatime"));
     }
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
+    {
+        switch (array_shift($args)) {
+            case 'reload':
+                if ($sender->isOp()) {
+                    $config = $this->getConfig();
+                    $config->save();
+                    $config->reload();
+                }
+                break;
+        }
+        return true;
+    }
+
     public function onFactionCheck(Player $player){
         $name = $player->getName();
         if(!$this->pro) return "NoPlug";
