@@ -31,31 +31,30 @@ class Main extends PluginBase implements Listener
     /** @var Config $killchat */
     public $killchat;
 
-    /** @var KillChatInterfaces $instance */
+    /** @var KillChat $instance */
     public $instance;
-
 
 
     public function onEnable()
     {
+        @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
-        if(!$this->eco = $this->getServer()->getPluginManager()->getPlugin('EconomyAPI')) {
+        if (!$this->eco = $this->getServer()->getPluginManager()->getPlugin('EconomyAPI')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " EconomyAPI not found");
         }
-        if(!$this->pro = $this->getServer()->getPluginManager()->getPlugin('FactionsPro')) {
+        if (!$this->pro = $this->getServer()->getPluginManager()->getPlugin('FactionsPro')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " FactionPro not found");
         }
-        if(!$this->pure = $this->getServer()->getPluginManager()->getPlugin('PurePerms')) {
+        if (!$this->pure = $this->getServer()->getPluginManager()->getPlugin('PurePerms')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " PurePerms not found");
         }
+
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
-        if ($this->getConfig()->get("Allow.KillChat" == true)){
-            $this->instance = new KillChat($this);
-            $this->killchat = new Config($this->getDataFolder() . "players.yml", Config::YAML);
-            $this->getServer()->getPluginManager()->registerEvents(new KillEvents($this), $this);
-        }
+        $this->instance = new KillChat($this);
+        $this->killchat = new Config($this->getDataFolder() . "players.yml", Config::YAML);
+        $this->getServer()->getPluginManager()->registerEvents(new KillEvents($this), $this);
     }
 
     public function onDisable()
@@ -108,17 +107,14 @@ class Main extends PluginBase implements Listener
     public function onJoin(PlayerJoinEvent $e)
     {
         $name = $e->getPlayer()->getLowerCaseName();
-        if ($this->getConfig()->get("Allow.KillChat" == true)) {
-            if (!$this->getPlayers()->exists($name)) {
-                $this->getPlayers()->set($name, [
-                    "kills" => 0,
-                    "deaths" => 0
-                ]);
-                $this->getPlayers()->save(true);
-            }
+        if (!$this->getPlayers()->exists($name)) {
+            $this->getPlayers()->set($name, [
+                "kills" => 0,
+                "deaths" => 0
+            ]);
+            $this->getPlayers()->save(true);
         }
     }
-
     /**
      * @param Player $player
      * @return string
@@ -159,10 +155,10 @@ class Main extends PluginBase implements Listener
             $this->getServer()->getMotd(), #11
             $this->onFactionCheck($player), #12
             $player->getName(), #13
-            $this->getTime($player), #14
+            $this->getTime(), #14
             $this->instance->getPlayerKills($player), #15
             $this->instance->getPlayerDeaths($player), #16
-            $player->getPing($name), #17
+            $player->getPing(), #17
             $this->onGroupCheck($player) #18
         ), $this->getConfig()->getNested("text"));
     }

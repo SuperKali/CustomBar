@@ -27,6 +27,7 @@ class KillEvents implements Listener
                 $victim = strtolower($player->getName());
                 $this->getMain()->getPlayers()->setNested("$kill.kills", $this->getMain()->getPlayers()->getNested("$kill.kills") + 1);
                 $this->getMain()->getPlayers()->setNested("$victim.deaths", $this->getMain()->getPlayers()->getNested("$victim.deaths") + 1);
+                $this->getMain()->getPlayers()->save(true);
             }
         }
     }

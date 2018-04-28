@@ -19,5 +19,3 @@ timezone: CET
 
 #TimeZones Format Configuration Example (H:i) Format 24 hours (h:i A) Format 12 hours, Default formatime 24 hours!
 formatime: H:i
-#KillChat for show kills and deaths!
-Allow.KillChat: true

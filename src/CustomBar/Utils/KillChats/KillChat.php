@@ -2,10 +2,10 @@
 namespace CustomBar\Utils\KillChats;
 
 use CustomBar\Main;
-use CustomBar\Utils\KillChatInterfaces;
+use pocketmine\event\Listener;
 use pocketmine\Player;
 
-class KillChat implements KillChatInterfaces {
+class KillChat implements Listener {
 
     /** @var Main */
     public $main;
