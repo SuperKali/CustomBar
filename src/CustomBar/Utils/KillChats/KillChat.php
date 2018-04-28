@@ -2,40 +2,40 @@
 namespace CustomBar\Utils\KillChats;
 
 use CustomBar\Main;
-use pocketmine\event\Listener;
-use pocketmine\plugin\Plugin;
-use pocketmine\utils\Config;
+use CustomBar\Utils\KillChatInterfaces;
+use pocketmine\Player;
 
-class KillChat implements Listener {
-    public $owner;
+class KillChat implements KillChatInterfaces {
 
-    public function __construct(Plugin $plugin)
+    /** @var Main */
+    public $main;
+
+    public function __construct(Main $main)
     {
-        $this->owner = $plugin;
+        $this->main = $main;
     }
 
-    public static function getKills($player, Main $main){
-        $data = new Config($main->getDataFolder() . "data/" . $player->getLowerCaseName() . ".yml", Config::YAML);
-        //Check data
-        if($data->exists("kills") && $data->exists("deaths")){
-            return $data->get("kills");
-        }else{
-            $data->setAll(array("kills" => 0, "deaths" => 0));
-            $data->save();
-        }
-        return true;
+    /**
+     * @param Player $player
+     */
+    public function getPlayerKills(Player $player) {
+        $player = strtolower($player);
+        $this->getMain()->getPlayers()->getNested("$player.kills");
     }
 
-    public static function getDeaths($player, Main $main){
-        $data = new Config($main->getDataFolder() . "data/" . $player->getLowerCaseName() . ".yml", Config::YAML);
-        //Check data
-        if($data->exists("kills") && $data->exists("deaths")){
-            return $data->get("deaths");
-        }else{
-            $data->setAll(array("kills" => 0, "deaths" => 0));
-            $data->save();
-        }
-        return true;
+    /**
+     * @param Player $player
+     */
+    public function getPlayerDeaths(Player $player){
+        $player = strtolower($player);
+        $this->getMain()->getPlayers()->getNested("$player.deaths");
+    }
+
+    /**
+     * @return Main
+     */
+    public function getMain(): Main{
+        return $this->main;
     }
 }
 

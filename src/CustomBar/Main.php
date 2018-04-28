@@ -3,12 +3,15 @@
 namespace CustomBar;
 
 use CustomBar\Task\TaskHud;
+use CustomBar\Utils\KillChatInterfaces;
 use CustomBar\Utils\KillChats\KillChat;
 use CustomBar\Utils\KillChats\KillEvents;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as CL;
 use pocketmine\Player;
 
@@ -17,8 +20,7 @@ use CustomBar\Task\TaskHud as TH;
 
 class Main extends PluginBase implements Listener
 {
-    public $plugin;
-
+    /** @var string $prefix */
     public $prefix = CL::DARK_GRAY . "[" . CL::BLUE . "Custom" . CL::RED . "Hud" . CL::DARK_GRAY . "]" . CL::RESET;
 
     public $eco;
@@ -26,9 +28,16 @@ class Main extends PluginBase implements Listener
     public $chat;
     public $pure;
 
+    /** @var Config $killchat */
+    public $killchat;
+
+    /** @var KillChatInterfaces $instance */
+    public $instance;
+
+
+
     public function onEnable()
     {
-        @mkdir($this->getDataFolder() . "data/");
         $this->saveDefaultConfig();
         if(!$this->eco = $this->getServer()->getPluginManager()->getPlugin('EconomyAPI')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " EconomyAPI not found");
@@ -43,7 +52,8 @@ class Main extends PluginBase implements Listener
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
         if ($this->getConfig()->get("Allow.KillChat" == true)){
-            $this->getServer()->getPluginManager()->registerEvents(new KillChat($this), $this);
+            $this->instance = new KillChat($this);
+            $this->killchat = new Config($this->getDataFolder() . "players.yml", Config::YAML);
             $this->getServer()->getPluginManager()->registerEvents(new KillEvents($this), $this);
         }
     }
@@ -53,25 +63,20 @@ class Main extends PluginBase implements Listener
         $this->saveDefaultConfig();
         $this->getLogger()->info($this->prefix . CL::RED . " by SuperKali Disable");
     }
+
+    /**
+     * @return false|string
+     */
     public function getTime()
     {
         date_default_timezone_set($this->getConfig()->getNested("timezone"));
         return date($this->getConfig()->get("formatime"));
     }
-    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
-    {
-        switch (array_shift($args)) {
-            case 'reload':
-                if ($sender->isOp()) {
-                    $config = $this->getConfig();
-                    $config->save();
-                    $config->reload();
-                }
-                break;
-        }
-        return true;
-    }
 
+    /**
+     * @param Player $player
+     * @return string
+     */
     public function onFactionCheck(Player $player){
         $name = $player->getName();
         if(!$this->pro) return "NoPlug";
@@ -79,17 +84,45 @@ class Main extends PluginBase implements Listener
         If(!$faz) return "NoFaz";
         return $faz;
     }
+
+    /**
+     * @param Player $player
+     * @return string
+     */
     public function onGroupCheck(Player $player){
         if(!$this->pure) return "NoPlug";
         $pp = $this->pure->getUserDataMgr()->getGroup($player)->getName();
         return $pp;
     }
+
+    /**
+     * @param Player $player
+     * @return string
+     */
     public function onEconomyAPICheck(Player $player){
         $name = $player->getName();
         if(!$this->eco) return "NoPlug";
         $eco = $this->eco->myMoney($name);
         return $eco;
     }
+    public function onJoin(PlayerJoinEvent $e)
+    {
+        $name = $e->getPlayer()->getLowerCaseName();
+        if ($this->getConfig()->get("Allow.KillChat" == true)) {
+            if (!$this->getPlayers()->exists($name)) {
+                $this->getPlayers()->set($name, [
+                    "kills" => 0,
+                    "deaths" => 0
+                ]);
+                $this->getPlayers()->save(true);
+            }
+        }
+    }
+
+    /**
+     * @param Player $player
+     * @return string
+     */
     public function formatHUD(Player $player): string
     {
         $name = $player->getName();
@@ -127,10 +160,17 @@ class Main extends PluginBase implements Listener
             $this->onFactionCheck($player), #12
             $player->getName(), #13
             $this->getTime($player), #14
-            KillChat::class ? KillChat::getKills($player, $this): "", #15
-            KillChat::class ? KillChat::getDeaths($player, $this): "", #16
+            $this->instance->getPlayerKills($player), #15
+            $this->instance->getPlayerDeaths($player), #16
             $player->getPing($name), #17
             $this->onGroupCheck($player) #18
         ), $this->getConfig()->getNested("text"));
+    }
+
+    /**
+     * @return Config
+     */
+    public function getPlayers(): Config{
+        return $this->killchat;
     }
 }
