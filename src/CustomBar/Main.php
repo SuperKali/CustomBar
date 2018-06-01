@@ -2,12 +2,8 @@
 
 namespace CustomBar;
 
-use CustomBar\Task\TaskHud;
-use CustomBar\Utils\KillChatInterfaces;
 use CustomBar\Utils\KillChats\KillChat;
 use CustomBar\Utils\KillChats\KillEvents;
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\plugin\PluginBase;
@@ -16,6 +12,7 @@ use pocketmine\utils\TextFormat as CL;
 use pocketmine\Player;
 
 use CustomBar\Task\TaskHud as TH;
+use pocketmine\utils\TextFormat;
 
 
 class Main extends PluginBase implements Listener
@@ -76,11 +73,12 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return string
      */
-    public function onFactionCheck(Player $player){
+    public function onFactionCheck(Player $player)
+    {
         $name = $player->getName();
-        if(!$this->pro) return "NoPlug";
+        if (!$this->pro) return "NoPlug";
         $faz = $this->pro->getPlayerFaction($name);
-        If(!$faz) return "NoFaz";
+        If (!$faz) return "NoFaz";
         return $faz;
     }
 
@@ -88,8 +86,9 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return string
      */
-    public function onGroupCheck(Player $player){
-        if(!$this->pure) return "NoPlug";
+    public function onGroupCheck(Player $player)
+    {
+        if (!$this->pure) return "NoPlug";
         $pp = $this->pure->getUserDataMgr()->getGroup($player)->getName();
         return $pp;
     }
@@ -97,17 +96,18 @@ class Main extends PluginBase implements Listener
     /**
      * @return string
      */
-    public function getUptime(): string {
+    public function getUptime(): string
+    {
         $time = microtime(true) - \pocketmine\START_TIME;
         $seconds = floor($time % 60);
         $minutes = null;
         $hours = null;
         $days = null;
-        if($time >= 60){
+        if ($time >= 60) {
             $minutes = floor(($time % 3600) / 60);
-            if($time >= 3600){
+            if ($time >= 3600) {
                 $hours = floor(($time % (3600 * 24)) / 3600);
-                if($time >= 3600 * 24){
+                if ($time >= 3600 * 24) {
                     $days = floor($time / (3600 * 24));
                 }
             }
@@ -126,9 +126,10 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return string
      */
-    public function onEconomyAPICheck(Player $player){
+    public function onEconomyAPICheck(Player $player)
+    {
         $name = $player->getName();
-        if(!$this->eco) return "NoPlug";
+        if (!$this->eco) return "NoPlug";
         $eco = $this->eco->myMoney($name);
         return $eco;
     }
@@ -137,11 +138,44 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return int
      */
-    public function getItemID(Player $player){
+    public function getItemID(Player $player)
+    {
         if (!$player->getInventory()->getItemInHand()->getId()) return 0;
         $id = $player->getInventory()->getItemInHand()->getId();
         return $id;
     }
+
+    /**
+     * @param Player $player
+     * @return int
+     */
+    public function getItemMeta(Player $player)
+    {
+        if (!$player->getInventory()->getItemInHand()->getDamage()) return 0;
+        $meta = $player->getInventory()->getItemInHand()->getDamage();
+        return $meta;
+    }
+
+    /**
+     * @param Player $player
+     * @return bool|string
+     */
+    public function colorPing(Player $player)
+    {
+        $ping = $player->getPing();
+        if ($ping < 100) {
+            return TextFormat::GREEN . $ping;
+        } elseif ($ping < 150) {
+            return TextFormat::GOLD . $ping;
+        } elseif ($ping < 250) {
+            return TextFormat::RED . $ping;
+        }
+        return false;
+    }
+
+    /**
+     * @param PlayerJoinEvent $e
+     */
     public function onJoin(PlayerJoinEvent $e)
     {
         $name = $e->getPlayer()->getLowerCaseName();
@@ -182,6 +216,7 @@ class Main extends PluginBase implements Listener
             "{client-ip}", #20
             "{server-ip}", #21
             "{uptime}", #22
+            "{itemeta}" #23
         ), array(
             "§", #1
             $this->getServer()->getTicksPerSecond(), #2
@@ -197,14 +232,15 @@ class Main extends PluginBase implements Listener
             $this->onFactionCheck($player), #12
             $player->getName(), #13
             $this->getTime(), #14
-            $this->instance->getPlayerKills($player), #15
-            $this->instance->getPlayerDeaths($player), #16
-            $player->getPing(), #17
+            $this->getInstance()->getPlayerKills($player) , #15
+            $this->getInstance()->getPlayerDeaths($player), #16
+            $this->colorPing($player), #17
             $this->onGroupCheck($player), #18
             $this->getItemID($player), #19
             $player->getAddress(), #20
             $this->getServer()->getIp(), #21
             $this->getUptime(), #22
+            $this->getItemMeta($player) #23
         ), $this->getConfig()->getNested("text"));
     }
 
@@ -213,5 +249,12 @@ class Main extends PluginBase implements Listener
      */
     public function getPlayers(): Config{
         return $this->killchat;
+    }
+
+    /**
+     * @return KillChat
+     */
+    public function getInstance(): KillChat{
+        return $this->instance;
     }
 }
