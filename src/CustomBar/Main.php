@@ -132,6 +132,16 @@ class Main extends PluginBase implements Listener
         $eco = $this->eco->myMoney($name);
         return $eco;
     }
+
+    /**
+     * @param Player $player
+     * @return int
+     */
+    public function getItemID(Player $player){
+        if (!$player->getInventory()->getItemInHand()->getId()) return 0;
+        $id = $player->getInventory()->getItemInHand()->getId();
+        return $id;
+    }
     public function onJoin(PlayerJoinEvent $e)
     {
         $name = $e->getPlayer()->getLowerCaseName();
@@ -191,7 +201,7 @@ class Main extends PluginBase implements Listener
             $this->instance->getPlayerDeaths($player), #16
             $player->getPing(), #17
             $this->onGroupCheck($player), #18
-            $player->getInventory()->getItemInHand()->getId() ?? 0, #19
+            $this->getItemID($player), #19
             $player->getAddress(), #20
             $this->getServer()->getIp(), #21
             $this->getUptime(), #22
