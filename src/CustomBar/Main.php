@@ -95,6 +95,34 @@ class Main extends PluginBase implements Listener
     }
 
     /**
+     * @return string
+     */
+    public function getUptime(): string {
+        $time = microtime(true) - \pocketmine\START_TIME;
+        $seconds = floor($time % 60);
+        $minutes = null;
+        $hours = null;
+        $days = null;
+        if($time >= 60){
+            $minutes = floor(($time % 3600) / 60);
+            if($time >= 3600){
+                $hours = floor(($time % (3600 * 24)) / 3600);
+                if($time >= 3600 * 24){
+                    $days = floor($time / (3600 * 24));
+                }
+            }
+        }
+        $uptime = ($minutes !== null ?
+                ($hours !== null ?
+                    ($days !== null ?
+                        "$days days "
+                        : "") . "$hours hours "
+                    : "") . "$minutes minutes "
+                : "") . "$seconds seconds";
+        return $uptime;
+    }
+
+    /**
      * @param Player $player
      * @return string
      */
@@ -121,7 +149,6 @@ class Main extends PluginBase implements Listener
      */
     public function formatHUD(Player $player): string
     {
-        $name = $player->getName();
         return str_replace(array(
             "&", #1
             "{tps}", #2
@@ -141,6 +168,10 @@ class Main extends PluginBase implements Listener
             "{deaths}", #16
             "{ping}", #17
             "{group}", #18
+            "{itemid}", #19
+            "{client-ip}", #20
+            "{server-ip}", #21
+            "{uptime}", #22
         ), array(
             "§", #1
             $this->getServer()->getTicksPerSecond(), #2
@@ -159,7 +190,11 @@ class Main extends PluginBase implements Listener
             $this->instance->getPlayerKills($player), #15
             $this->instance->getPlayerDeaths($player), #16
             $player->getPing(), #17
-            $this->onGroupCheck($player) #18
+            $this->onGroupCheck($player), #18
+            $player->getInventory()->getItemInHand()->getId() ?? 0, #19
+            $player->getAddress(), #20
+            $this->getServer()->getIp(), #21
+            $this->getUptime(), #22
         ), $this->getConfig()->getNested("text"));
     }
 

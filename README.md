@@ -30,6 +30,7 @@
 * {deaths} KillChat necessary!
 * {group} PurePerms necessary!
 * & and §
+* also another!
 
 ## Is the plugin working?
 

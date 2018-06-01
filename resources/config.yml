@@ -5,7 +5,7 @@
 #  \___\_,_/__/\__\___/_|_|_| |_||_|\_,_\__,_|
 #
 
-#Text you will see on the server, {tps}, {load}, {players}, {max_players}, {line}, {x} {y} {z}, {coins}, {MOTD}, {faction}, {name}, {time}, {kills}, {deaths}, {ping}, {group} and & for color
+#Text you will see on the server, {tps}, {load}, {players}, {max_players}, {line}, {x} {y} {z}, {coins}, {MOTD}, {faction}, {name}, {time}, {kills}, {deaths}, {ping}, {group}, {itemid}, {client-ip}, {server-ip}, {uptime} and & for color
 #{coins} You need to use EconomyAPI to show money!
 
 #Text to show on the server in the custom bar!
