@@ -48,7 +48,7 @@ class Main extends PluginBase implements Listener
 
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
+        $this->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
         $this->instance = new KillChat($this);
         $this->killchat = new Config($this->getDataFolder() . "players.yml", Config::YAML);
         $this->getServer()->getPluginManager()->registerEvents(new KillEvents($this), $this);

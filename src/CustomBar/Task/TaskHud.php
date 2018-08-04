@@ -2,18 +2,20 @@
 
 namespace CustomBar\Task;
 
-use pocketmine\scheduler\PluginTask;
+use CustomBar\Main;
+use pocketmine\scheduler\Task;
 
 
-class TaskHud extends PluginTask
+class TaskHud extends Task
 {
+    /** @var Main $plugin */
+    public $plugin;
 
-    public function __construct($plugin)
+    public function __construct(Main $plugin)
     {
         $this->plugin = $plugin;
-        parent::__construct($plugin);
     }
-    // onRun Task
+
     public function onRun(int $tick)
     {
         $pl = $this->plugin->getServer()->getOnlinePlayers();
