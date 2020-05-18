@@ -185,7 +185,7 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return string
      */
-    public function formatHUD(Player $player) {
+    public function formatHUD(Player $player): string {
         return str_replace(array(
             "&", #1
             "{tps}", #2
