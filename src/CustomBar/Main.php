@@ -25,6 +25,9 @@ class Main extends PluginBase implements Listener
     public $chat;
     public $pure;
 
+    /** @var Config $config */
+    public $config;
+
     /** @var Config $killchat */
     public $killchat;
 
@@ -45,8 +48,8 @@ class Main extends PluginBase implements Listener
         if (!$this->pure = $this->getServer()->getPluginManager()->getPlugin('PurePerms')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " PurePerms not found");
         }
-
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
         $this->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
         $this->instance = new KillChat($this);
@@ -63,8 +66,7 @@ class Main extends PluginBase implements Listener
     /**
      * @return false|string
      */
-    public function getTime()
-    {
+    public function getTime() {
         date_default_timezone_set($this->getConfig()->getNested("timezone"));
         return date($this->getConfig()->get("formatime"));
     }
@@ -73,8 +75,7 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return string
      */
-    public function onFactionCheck(Player $player)
-    {
+    public function onFactionCheck(Player $player): string {
         $name = $player->getName();
         if (!$this->pro) return "NoPlug";
         $faz = $this->pro->getPlayerFaction($name);
@@ -86,8 +87,7 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return string
      */
-    public function onGroupCheck(Player $player)
-    {
+    public function onGroupCheck(Player $player): string {
         if (!$this->pure) return "NoPlug";
         $pp = $this->pure->getUserDataMgr()->getGroup($player)->getName();
         return $pp;
@@ -96,8 +96,7 @@ class Main extends PluginBase implements Listener
     /**
      * @return string
      */
-    public function getUptime(): string
-    {
+    public function getUptime(): string {
         $time = microtime(true) - \pocketmine\START_TIME;
         $seconds = floor($time % 60);
         $minutes = null;
@@ -126,8 +125,7 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return string
      */
-    public function onEconomyAPICheck(Player $player)
-    {
+    public function onEconomyAPICheck(Player $player): string {
         $name = $player->getName();
         if (!$this->eco) return "NoPlug";
         $eco = $this->eco->myMoney($name);
@@ -138,8 +136,7 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return int
      */
-    public function getItemID(Player $player)
-    {
+    public function getItemID(Player $player): int {
         if (!$player->getInventory()->getItemInHand()->getId()) return 0;
         $id = $player->getInventory()->getItemInHand()->getId();
         return $id;
@@ -149,8 +146,7 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return int
      */
-    public function getItemMeta(Player $player)
-    {
+    public function getItemMeta(Player $player): int {
         if (!$player->getInventory()->getItemInHand()->getDamage()) return 0;
         $meta = $player->getInventory()->getItemInHand()->getDamage();
         return $meta;
@@ -160,8 +156,7 @@ class Main extends PluginBase implements Listener
      * @param Player $player
      * @return bool|string
      */
-    public function colorPing(Player $player)
-    {
+    public function colorPing(Player $player) {
         $ping = $player->getPing();
         if ($ping < 100) {
             return TextFormat::GREEN . $ping;
@@ -176,23 +171,21 @@ class Main extends PluginBase implements Listener
     /**
      * @param PlayerJoinEvent $e
      */
-    public function onJoin(PlayerJoinEvent $e)
-    {
+    public function onJoin(PlayerJoinEvent $e) {
         $name = $e->getPlayer()->getLowerCaseName();
         if (!$this->getPlayers()->exists($name)) {
             $this->getPlayers()->set($name, [
                 "kills" => 0,
                 "deaths" => 0
             ]);
-            $this->getPlayers()->save(true);
+            $this->getPlayers()->save();
         }
     }
     /**
      * @param Player $player
      * @return string
      */
-    public function formatHUD(Player $player): string
-    {
+    public function formatHUD(Player $player) {
         return str_replace(array(
             "&", #1
             "{tps}", #2
@@ -244,17 +237,21 @@ class Main extends PluginBase implements Listener
         ), $this->getConfig()->getNested("text"));
     }
 
+    public function getConfig(): Config {
+        return $this->config;
+    }
+
     /**
      * @return Config
      */
-    public function getPlayers(): Config{
+    public function getPlayers(): Config {
         return $this->killchat;
     }
 
     /**
      * @return KillChat
      */
-    public function getInstance(): KillChat{
+    public function getInstance(): KillChat {
         return $this->instance;
     }
 }
