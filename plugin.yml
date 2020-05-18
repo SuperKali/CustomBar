@@ -1,6 +1,6 @@
 name: CustomBar
 author: SuperKali
-version: 1.3.2-beta
+version: 1.3.3-stable
 api: 3.12.1
 main: CustomBar\Main
 description: Custom bar for your server!

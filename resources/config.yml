@@ -8,6 +8,9 @@
 #Text you will see on the server, {tps}, {load}, {players}, {max_players}, {line}, {x} {y} {z}, {coins}, {MOTD}, {faction}, {name}, {time}, {kills}, {deaths}, {ping}, {group}, {itemid}, {itemeta}, {client-ip}, {server-ip}, {uptime} and & for color
 #{coins} You need to use EconomyAPI to show money!
 
+#Prefix default command
+prefix: "&9Custom&cHud"
+
 #Text to show on the server in the custom bar!
 text: "&9Custom&cHud &6Make by &bSuperKali{line}&3TPS&8:&6 {tps} &9Load&8:&4 {load}&r{line}&eXYZ&8:&2 {x} {y} {z}&r"
 

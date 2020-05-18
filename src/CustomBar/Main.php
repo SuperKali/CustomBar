@@ -2,10 +2,13 @@
 
 namespace CustomBar;
 
+use CustomBar\Commands\HudSwitcher;
 use CustomBar\Utils\KillChats\KillChat;
 use CustomBar\Utils\KillChats\KillEvents;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerLoginEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as CL;
@@ -55,6 +58,7 @@ class Main extends PluginBase implements Listener
         $this->instance = new KillChat($this);
         $this->killchat = new Config($this->getDataFolder() . "players.yml", Config::YAML);
         $this->getServer()->getPluginManager()->registerEvents(new KillEvents($this), $this);
+        $this->getServer()->getCommandMap()->register("hud", new HudSwitcher("hud", $this));
     }
 
     public function onDisable()
@@ -180,6 +184,20 @@ class Main extends PluginBase implements Listener
             ]);
             $this->getPlayers()->save();
         }
+    }
+
+    /**
+     * @param PlayerLoginEvent $e
+     */
+    public function onLogin(PlayerLoginEvent $e) {
+        HudSwitcher::addPlayer($e->getPlayer()); // ADD PLAYER ON CACHE FOR SHOW THE CUSTOMBAR
+    }
+
+    /**
+     * @param PlayerQuitEvent $e
+     */
+    public function onQuit(PlayerQuitEvent $e) {
+        HudSwitcher::removePlayer($e->getPlayer());  // REMOVE THE PLAYER ON CACHE
     }
     /**
      * @param Player $player

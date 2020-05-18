@@ -1,4 +1,4 @@
-# Custom Bar Plugin for PMMP
+# Custom Bar Plugin for PMMP and ALTAY
 
 [![](https://poggit.pmmp.io/shield.dl.total/CustomBar)](https://poggit.pmmp.io/p/CustomBar)
 [![](https://poggit.pmmp.io/shield.api/CustomBar)](https://poggit.pmmp.io/p/CustomBar)
@@ -36,8 +36,11 @@
 
 * Yes, But the plugin is not completely finished yet!
 
+## Commands
+* /hud for switch off or on the hud
+
 ## Which version is compatible?
 
 This plugin is compatible with:
 - [x] **[PMMP]**
-- [x] **[ClearSky-PMMP]**
+- [x] **[PMMP-ALTAY]**

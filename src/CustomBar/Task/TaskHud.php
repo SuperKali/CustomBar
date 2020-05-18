@@ -2,6 +2,7 @@
 
 namespace CustomBar\Task;
 
+use CustomBar\Commands\HudSwitcher;
 use CustomBar\Main;
 use pocketmine\scheduler\Task;
 
@@ -20,8 +21,10 @@ class TaskHud extends Task
     {
         $pl = $this->plugin->getServer()->getOnlinePlayers();
         foreach ($pl as $player) {
-            $text = $this->plugin->formatHUD($player);
-            $player->sendPopup($text);
+            if (HudSwitcher::isPlayer($player)){ // CHECK PLAYER ON HUD IF IT'S ON OR OFF
+                $text = $this->plugin->formatHUD($player);
+                $player->sendPopup($text);
+            }
         }
     }
 }
