@@ -15,6 +15,7 @@ use pocketmine\utils\TextFormat as CL;
 use pocketmine\Player;
 
 use CustomBar\Task\TaskHud as TH;
+use const pocketmine\START_TIME;
 
 
 class Main extends PluginBase implements Listener
@@ -99,7 +100,7 @@ class Main extends PluginBase implements Listener
      * @return string
      */
     public function getUptime(): string {
-        $time = microtime(true) - \pocketmine\START_TIME;
+        $time = microtime(true) - START_TIME;
         $seconds = floor($time % 60);
         $minutes = null;
         $hours = null;
