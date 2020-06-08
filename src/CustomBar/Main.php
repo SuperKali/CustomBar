@@ -15,7 +15,6 @@ use pocketmine\utils\TextFormat as CL;
 use pocketmine\Player;
 
 use CustomBar\Task\TaskHud as TH;
-use pocketmine\utils\TextFormat;
 
 
 class Main extends PluginBase implements Listener
@@ -25,7 +24,6 @@ class Main extends PluginBase implements Listener
 
     public $eco;
     public $pro;
-    public $chat;
     public $pure;
 
     /** @var Config $config */
@@ -163,11 +161,11 @@ class Main extends PluginBase implements Listener
     public function colorPing(Player $player) {
         $ping = $player->getPing();
         if ($ping < 100) {
-            return TextFormat::GREEN . $ping;
+            return CL::GREEN . $ping;
         } elseif ($ping < 150) {
-            return TextFormat::GOLD . $ping;
+            return CL::GOLD . $ping;
         } elseif ($ping < 250) {
-            return TextFormat::RED . $ping;
+            return CL::RED . $ping;
         }
         return false;
     }
