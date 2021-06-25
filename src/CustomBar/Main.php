@@ -33,8 +33,8 @@ class Main extends PluginBase implements Listener
     /** @var Config $killchat */
     public $killchat;
 
-    /** @var KillChat $instance */
-    public $instance;
+    /** @var Main $instance */
+    private static $instance;
 
 
     public function onEnable()
@@ -50,11 +50,11 @@ class Main extends PluginBase implements Listener
         if (!$this->pure = $this->getServer()->getPluginManager()->getPlugin('PurePerms')) {
             $this->getServer()->getLogger()->alert($this->prefix . CL::RED . " PurePerms not found");
         }
+        self::$instance = $this;
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->getLogger()->info($this->prefix . CL::GREEN . " by SuperKali Enable");
         $this->getScheduler()->scheduleRepeatingTask(new TH($this), $this->getConfig()->get("time") * 4);
-        $this->instance = new KillChat($this);
         $this->killchat = new Config($this->getDataFolder() . "players.yml", Config::YAML);
         $this->getServer()->getPluginManager()->registerEvents(new KillEvents($this), $this);
         $this->getServer()->getCommandMap()->register("hud", new HudSwitcher("hud", $this));
@@ -82,7 +82,7 @@ class Main extends PluginBase implements Listener
         $name = $player->getName();
         if (!$this->pro) return "NoPlug";
         $faz = $this->pro->getPlayerFaction($name);
-        If (!$faz) return "NoFaz";
+        if (!$faz) return "NoFaz";
         return $faz;
     }
 
@@ -242,8 +242,8 @@ class Main extends PluginBase implements Listener
             $this->onFactionCheck($player), #12
             $player->getName(), #13
             $this->getTime(), #14
-            $this->getInstance()->getPlayerKills($player) , #15
-            $this->getInstance()->getPlayerDeaths($player), #16
+            KillChat::getPlayerKills($player) , #15
+            KillChat::getPlayerDeaths($player), #16
             $this->colorPing($player), #17
             $this->onGroupCheck($player), #18
             $this->getItemID($player), #19
@@ -266,9 +266,9 @@ class Main extends PluginBase implements Listener
     }
 
     /**
-     * @return KillChat
+     * @return Main
      */
-    public function getInstance(): KillChat {
-        return $this->instance;
+    public static function getInstance(): Main{
+        return self::$instance;
     }
 }

@@ -2,40 +2,30 @@
 namespace CustomBar\Utils\KillChats;
 
 use CustomBar\Main;
-use pocketmine\event\Listener;
 use pocketmine\Player;
 
-class KillChat implements Listener {
+class KillChat {
 
-    /** @var Main */
-    public $main;
-
-    public function __construct(Main $main)
-    {
-        $this->main = $main;
+    /**
+     * @param Player $player
+     */
+    public static function getPlayerKills(Player $player) {
+        $player = strtolower($player);
+        if (Main::getInstance()->getPlayers()->getNested("$player.kills") >= 0){
+            return Main::getInstance()->getPlayers()->getNested("$player.kills");
+        }
+        return "0";
     }
 
     /**
      * @param Player $player
      */
-    public function getPlayerKills(Player $player) {
+    public static function getPlayerDeaths(Player $player){
         $player = strtolower($player);
-        $this->getMain()->getPlayers()->getNested("$player.kills");
-    }
-
-    /**
-     * @param Player $player
-     */
-    public function getPlayerDeaths(Player $player){
-        $player = strtolower($player);
-        $this->getMain()->getPlayers()->getNested("$player.deaths");
-    }
-
-    /**
-     * @return Main
-     */
-    public function getMain(): Main{
-        return $this->main;
+        if (Main::getInstance()->getPlayers()->getNested("$player.deaths") >= 0){
+            return Main::getInstance()->getPlayers()->getNested("$player.deaths");
+        }
+        return "0";
     }
 }
 
